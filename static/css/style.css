@@ -1710,3 +1710,24 @@ h5 {
         display: none !important;
     }
 }
+/* Mobile Navigation Fixes */
+#mobileNav {
+    background: rgba(0, 8, 20, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+@media (max-width: 767px) {
+    .section:first-of-type {
+        padding-top: 120px !important;
+    }
+    .navbar {
+        background: rgba(0, 8, 20, 0.95);
+    }
+}
