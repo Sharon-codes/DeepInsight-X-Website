@@ -3,9 +3,9 @@ flask==2.3.3
 gunicorn==22.0.0
 
 # Model & processing
-torch==2.0.1
-torchvision==0.15.2
-torchaudio==2.0.2
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
 --extra-index-url https://download.pytorch.org/whl/cpu
 pydicom==2.4.4
 numpy==1.26.4
