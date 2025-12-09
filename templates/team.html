@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Hero -->
+<section class="section" style="padding-top: 8rem;">
+    <div class="container">
+        <div class="section-header center">
+            <div class="badge animate-fade-up">The Innovators</div>
+            <h1 class="section-title animate-fade-up delay-1">Meet the <span class="gradient-text">Team</span></h1>
+            <p class="section-desc animate-fade-up delay-2">
+                DeepInsight X was built by students passionate about using AI to solve real healthcare challenges.
+            </p>
+        </div>
+
+        <!-- Team Cards -->
+        <div class="team-grid" style="max-width: 850px; margin: 0 auto;">
+            <!-- Nikita -->
+            <div class="glass-card team-card animate-fade-up delay-3">
+                <img src="{{ url_for('static', filename='images/nikita.jpg') }}" alt="Nikita Lotlikar"
+                    class="team-avatar-img mb-4"
+                    style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 4px solid var(--primary); box-shadow: 0 10px 40px var(--glow-purple);">
+                <h3 class="team-name">Nikita Lotlikar</h3>
+                <div class="team-role">Research & Biology</div>
+                <p class="team-bio mb-3">
+                    Focused on the biological foundations, medical research, and dataset curation. Ensured clinical
+                    relevance and accuracy of the 14 detectable conditions.
+                </p>
+                <div class="d-flex justify-content-center gap-2">
+                    <a href="mailto:nikita@example.com" class="btn btn-secondary"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i class="bi bi-envelope"></i> Email
+                    </a>
+                    <a href="https://linkedin.com/in/nikita" target="_blank" class="btn btn-secondary"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i class="bi bi-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sharon -->
+            <div class="glass-card team-card animate-fade-up delay-4">
+                <img src="{{ url_for('static', filename='images/sharon.jpg') }}" alt="Sharon Melhi"
+                    class="team-avatar-img mb-4"
+                    style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 4px solid var(--primary); box-shadow: 0 10px 40px var(--glow-purple);">
+                <h3 class="team-name">Sharon Melhi</h3>
+                <div class="team-role">Technical Lead & Development</div>
+                <p class="team-bio mb-3">
+                    Architected the ConvNeXt Large model, implemented Grad-CAM visualization, and built the full-stack
+                    web application with Flask and PyTorch.
+                </p>
+                <div class="d-flex justify-content-center gap-2 flex-wrap">
+                    <a href="mailto:sharon@example.com" class="btn btn-secondary"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i class="bi bi-envelope"></i> Email
+                    </a>
+                    <a href="https://linkedin.com/in/sharon" target="_blank" class="btn btn-secondary"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i class="bi bi-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/sharon" target="_blank" class="btn btn-secondary"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <i class="bi bi-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mentor Section -->
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+        <div class="section-header center">
+            <h2 class="section-title">Project <span class="gradient-text">Mentor</span></h2>
+        </div>
+        <div class="glass-card team-card animate-fade-up delay-5" style="max-width: 500px; margin: 0 auto;">
+            <img src="{{ url_for('static', filename='images/Dr.SwarnalathaKS.jpg') }}" alt="Dr. Swarnalatha"
+                class="team-avatar-img mb-4"
+                style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 4px solid var(--primary); box-shadow: 0 10px 40px var(--glow-purple);">
+            <h3 class="team-name">Dr. Swarnalatha</h3>
+            <div class="team-role">Mentor & Guide</div>
+
+            <p class="team-bio mb-4 mt-3">
+                Provided expert guidance on research methodology, technical implementation, and academic rigor
+                throughout the development of DeepInsight X.
+            </p>
+
+            <div class="mt-3 pt-3" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <div
+                    style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.25rem;">
+                    Affiliation</div>
+                <div style="font-weight: 600; color: #e2e8f0; font-size: 1.1rem;">
+                    <i class="bi bi-mortarboard-fill me-2" style="color: var(--rose);"></i>Amity University Bengaluru
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technologies -->
+<section class="section" style="background: linear-gradient(180deg, transparent, rgba(0, 45, 98, 0.05), transparent);">
+    <div class="container">
+        <div class="section-header center">
+            <h2 class="section-title">Technologies & <span class="gradient-text">Frameworks</span></h2>
+            <p class="section-desc">Advanced AI and medical standards powering DeepInsight X</p>
+        </div>
+
+        <div class="tech-grid"
+            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 900px; margin: 0 auto;">
+            <div class="tech-item justify-content-center"><span class="tech-icon">🧠</span> ConvNeXt Large</div>
+            <div class="tech-item justify-content-center"><span class="tech-icon">🔍</span> Grad-CAM</div>
+            <div class="tech-item justify-content-center"><span class="tech-icon">⚖️</span> Weighted Focal Loss</div>
+            <div class="tech-item justify-content-center"><span class="tech-icon">🔥</span> PyTorch</div>
+            <div class="tech-item justify-content-center"><span class="tech-icon">⚡</span> AdamW & AMP</div>
+            <div class="tech-item justify-content-center"><span class="tech-icon">🌿</span> Bio-Inspired Pipeline</div>
+            <div class="tech-item justify-content-center"><span class="tech-icon">📋</span> 14-Class Ontology</div>
+            <div class="tech-item justify-content-center"><span class="tech-icon">🏥</span> HL7 / FHIR</div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

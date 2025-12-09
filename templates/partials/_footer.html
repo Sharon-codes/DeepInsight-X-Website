@@ -1,0 +1,49 @@
+<footer class="footer mt-auto" style="
+    padding: 1rem 0;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 100;
+">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+
+            <!-- Brand & Copyright -->
+            <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="DeepInsight X"
+                        style="height: 40px; width: auto;">
+                    <span
+                        style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; color: #f8fafc;">DeepInsight
+                        X</span>
+                </div>
+            </div>
+
+            <!-- Credits & GitHub -->
+            <div class="d-flex align-items-center gap-4">
+                <div
+                    style="font-size: 0.9rem; color: #94a3b8; background: rgba(255,255,255,0.05); padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+                    Built by <span style="color: #e2e8f0; font-weight: 600;">Nikita</span> & <span
+                        style="color: #e2e8f0; font-weight: 600;">Sharon</span>
+                </div>
+                <a href="https://github.com" target="_blank" style="
+                    color: #94a3b8; 
+                    transition: all 0.2s; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center;
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    background: rgba(255,255,255,0.05);
+                " onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.1)'"
+                    onmouseout="this.style.color='#94a3b8'; this.style.background='rgba(255,255,255,0.05)'">
+                    <i class="bi bi-github" style="font-size: 1.1rem;"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</footer>

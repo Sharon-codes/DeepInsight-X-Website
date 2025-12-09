@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Upload Section -->
+<section class="section" style="padding-top: 8rem;">
+    <div class="container">
+        <div class="upload-container">
+            <div class="section-header center">
+                <div class="badge animate-fade-up">Live Demo</div>
+                <h1 class="section-title animate-fade-up delay-1">Upload <span class="gradient-text">Chest X-ray</span>
+                </h1>
+                <p class="section-desc animate-fade-up delay-2" style="color: #e2e8f0;">
+                    Experience DeepInsight X in action. Upload an image and get AI-powered analysis in seconds.
+                </p>
+            </div>
+
+            <form id="upload-form" method="post" action="{{ url_for('analyze') }}" enctype="multipart/form-data"
+                class="animate-fade-up delay-3">
+                <div class="glass-card">
+                    <div id="dropzone" class="dropzone">
+                        <div class="dropzone-icon">
+                            <i class="bi bi-cloud-arrow-up"></i>
+                        </div>
+                        <h3 style="color: #e2e8f0;">Drop your X-ray here</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 1rem;">or</p>
+                        <button type="button" class="btn btn-secondary btn-lg" id="browse-btn">
+                            <i class="bi bi-folder2-open me-2"></i>Choose File
+                        </button>
+                        <input id="file-input" class="form-control" type="file" name="file"
+                            accept=".dcm,.png,.jpg,.jpeg" required style="display: none;">
+                        <p id="file-name" style="color: #00FFFF; margin-top: 1rem; font-weight: 600;"></p>
+                    </div>
+
+                    <div class="d-flex gap-2 justify-content-center mt-3">
+                        <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+                            <i class="bi bi-cpu"></i> Analyze X-ray
+                        </button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="document.getElementById('file-input').value=''; document.getElementById('file-name').textContent=''">
+                            <i class="bi bi-x-circle"></i> Clear
+                        </button>
+                    </div>
+
+                    <p class="text-center text-sm mt-3 mb-0" style="color: #cbd5e1;">
+                        <i class="bi bi-shield-check me-1"></i>
+                        Supported: PNG, JPG, JPEG, DICOM · Max size: {{ max_mb }}MB
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    const dz = document.getElementById('dropzone');
+    const input = document.getElementById('file-input');
+    const form = document.getElementById('upload-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const browseBtn = document.getElementById('browse-btn');
+    const fileName = document.getElementById('file-name');
+
+    // Browse button click
+    browseBtn.addEventListener('click', () => {
+        input.click();
+    });
+
+    // Show selected file name
+    input.addEventListener('change', () => {
+        if (input.files.length > 0) {
+            fileName.textContent = `Selected: ${input.files[0].name}`;
+        }
+    });
+
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => {
+        dz.addEventListener(e, ev => { ev.preventDefault(); ev.stopPropagation(); });
+    });
+
+    // Highlight on drag
+    ['dragenter', 'dragover'].forEach(e => dz.addEventListener(e, () => dz.classList.add('is-dragging')));
+    ['dragleave', 'drop'].forEach(e => dz.addEventListener(e, () => dz.classList.remove('is-dragging')));
+
+    // Handle drop
+    dz.addEventListener('drop', e => {
+        if (e.dataTransfer.files.length) {
+            input.files = e.dataTransfer.files;
+            fileName.textContent = `Selected: ${e.dataTransfer.files[0].name}`;
+        }
+    });
+
+    // Handle submit
+    form.addEventListener('submit', () => {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Analyzing...';
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Hero -->
+<section class="section" style="padding-top: 8rem;">
+    <div class="container">
+        <div class="section-header center">
+            <div class="badge animate-fade-up">Technical Deep Dive</div>
+            <h1 class="section-title animate-fade-up delay-1">How <span class="gradient-text">DeepInsight X</span> Works
+            </h1>
+            <p class="section-desc animate-fade-up delay-2" style="color: #e2e8f0; max-width: 700px; margin: 0 auto;">
+                A transparent look at the architecture, data, and logic behind our medical AI system.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- The Model -->
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+        <div class="glass-card animate-fade-up delay-3">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h3 class="mb-4"><i class="bi bi-cpu gradient-text me-2"></i>The Architecture</h3>
+                    <p style="color: #e2e8f0; font-size: 1.1rem; line-height: 1.8;">
+                        DeepInsight X is powered by <strong>ConvNeXt Large</strong>, a modern convolutional neural
+                        network that bridges the gap between standard CNNs and Vision Transformers.
+                    </p>
+                    <p style="color: #cbd5e1; margin-bottom: 2rem;">
+                        We selected ConvNeXt over ResNet-101 and EfficientNet-B4 because it offers superior accuracy on
+                        medical imaging tasks while maintaining reasonable inference speeds.
+                    </p>
+
+                    <div class="d-flex gap-4">
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.5rem; color: #f8fafc;">197M</div>
+                            <div style="color: #94a3b8; font-size: 0.9rem;">Parameters</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.5rem; color: #f8fafc;">224px</div>
+                            <div style="color: #94a3b8; font-size: 0.9rem;">Input Resolution</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.5rem; color: #f8fafc;">0.84</div>
+                            <div style="color: #94a3b8; font-size: 0.9rem;">AUC Score</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-4"
+                        style="background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
+                        <h5 class="mb-3" style="color: #e2e8f0;">Key Features</h5>
+                        <div class="d-flex gap-3 mb-3">
+                            <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                            <div>
+                                <strong style="color: #f8fafc; display: block;">Multi-Label Classification</strong>
+                                <span style="color: #94a3b8;">Predicts multiple conditions simultaneously.</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3 mb-3">
+                            <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                            <div>
+                                <strong style="color: #f8fafc; display: block;">Transfer Learning</strong>
+                                <span style="color: #94a3b8;">Pre-trained on ImageNet-22k for robust feature
+                                    extraction.</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-3">
+                            <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                            <div>
+                                <strong style="color: #f8fafc; display: block;">Explainable Output</strong>
+                                <span style="color: #94a3b8;">Integrated Grad-CAM for visual verification.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The Data -->
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-5 order-lg-2">
+                <h3 class="mb-4"><i class="bi bi-database gradient-text me-2"></i>The Dataset</h3>
+                <p style="color: #e2e8f0; line-height: 1.7;">
+                    Our model was trained on the <strong>NIH ChestX-ray14 dataset</strong>, one of the largest and most
+                    comprehensive collections of chest X-rays available.
+                </p>
+                <p style="color: #cbd5e1;">
+                    This massive scale ensures the model has seen a wide variety of patient anatomies, disease
+                    presentations, and image qualities.
+                </p>
+            </div>
+            <div class="col-lg-7 order-lg-1">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="glass-card text-center py-4">
+                            <div
+                                style="font-size: 2.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                280K+</div>
+                            <div style="color: #94a3b8; font-weight: 500;">Images</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="glass-card text-center py-4">
+                            <div
+                                style="font-size: 2.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                30K+</div>
+                            <div style="color: #94a3b8; font-weight: 500;">Patients</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="glass-card text-center py-4">
+                            <div
+                                style="font-size: 2.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                14</div>
+                            <div style="color: #94a3b8; font-weight: 500;">Classes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Workflow -->
+<section class="section">
+    <div class="container">
+        <div class="section-header center mb-5">
+            <h2 class="section-title">Analysis <span class="gradient-text">Workflow</span></h2>
+            <p class="section-desc" style="color: #e2e8f0;">From raw image to clinical insight in 6 steps.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4 col-sm-6">
+                <div class="glass-card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div
+                            style="width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                            1</div>
+                        <h4 class="mb-0" style="font-size: 1.1rem;">Upload</h4>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">User uploads a chest X-ray (PNG, JPG, DICOM).</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="glass-card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div
+                            style="width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                            2</div>
+                        <h4 class="mb-0" style="font-size: 1.1rem;">Preprocessing</h4>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">Image is resized to 224x224 and normalized.</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="glass-card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div
+                            style="width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                            3</div>
+                        <h4 class="mb-0" style="font-size: 1.1rem;">Inference</h4>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">ConvNeXt model predicts pathology probabilities.</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="glass-card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div
+                            style="width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                            4</div>
+                        <h4 class="mb-0" style="font-size: 1.1rem;">Grad-CAM</h4>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">Heatmaps generated for positive findings.</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="glass-card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div
+                            style="width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                            5</div>
+                        <h4 class="mb-0" style="font-size: 1.1rem;">Reporting</h4>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">Structured PDF report is compiled.</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="glass-card h-100">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div
+                            style="width: 32px; height: 32px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                            6</div>
+                        <h4 class="mb-0" style="font-size: 1.1rem;">Q&A</h4>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">AI Assistant answers user questions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 14 Conditions -->
+<section class="section"
+    style="background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.03), transparent);">
+    <div class="container">
+        <div class="section-header center">
+            <h2 class="section-title">14 Detectable <span class="gradient-text">Conditions</span></h2>
+            <p class="section-desc" style="color: #e2e8f0;">Each condition has distinct visual patterns and
+                clinical significance:</p>
+        </div>
+
+        <div class="diseases-grid">
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-lungs mb-1 d-block" style="font-size: 1.25rem; color: var(--emerald);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Atelectasis</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Lung collapse</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-heart-pulse mb-1 d-block" style="font-size: 1.25rem; color: var(--rose);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Cardiomegaly</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Enlarged heart</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-droplet mb-1 d-block" style="font-size: 1.25rem; color: var(--cyan);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Consolidation</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Fluid/pus in lung</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-water mb-1 d-block" style="font-size: 1.25rem; color: var(--cyan);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Edema</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Fluid buildup</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-moisture mb-1 d-block" style="font-size: 1.25rem; color: var(--cyan);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Effusion</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Fluid around lungs</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-wind mb-1 d-block" style="font-size: 1.25rem; color: var(--amber);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Emphysema</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Air sac damage</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-bricks mb-1 d-block" style="font-size: 1.25rem; color: var(--text-gray);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Fibrosis</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Scarred tissue</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-arrow-up-circle mb-1 d-block" style="font-size: 1.25rem; color: var(--rose);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Hernia</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Organ displacement</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-cloud-haze mb-1 d-block" style="font-size: 1.25rem; color: var(--text-gray);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Infiltration</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Abnormal substance</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-circle-fill mb-1 d-block" style="font-size: 1.25rem; color: var(--rose);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Mass</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Large lesion</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-circle mb-1 d-block" style="font-size: 1.25rem; color: var(--amber);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Nodule</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Small lesion</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-layers-half mb-1 d-block" style="font-size: 1.25rem; color: var(--text-gray);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Pleural Thick.</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Lining thickening</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-virus mb-1 d-block" style="font-size: 1.25rem; color: var(--rose);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Pneumonia</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Infection</div>
+            </div>
+            <div class="glass-card-sm text-center p-2">
+                <i class="bi bi-wind mb-1 d-block" style="font-size: 1.25rem; color: var(--cyan);"></i>
+                <div style="font-weight: 600; font-size: 0.9rem; color: #e2e8f0;">Pneumothorax</div>
+                <div style="font-size: 0.75rem; color: #cbd5e1;">Collapsed lung</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Disclaimer -->
+<section class="section">
+    <div class="container">
+        <div class="glass-card text-center" style="max-width: 700px; margin: 0 auto;">
+            <i class="bi bi-exclamation-triangle" style="font-size: 2rem; color: var(--amber);"></i>
+            <h3 class="mt-2 mb-2">Important Note</h3>
+            <p class="mb-0" style="color: #cbd5e1;">
+                DeepInsight X is a <strong>decision-support tool</strong>, not a replacement for qualified physicians.
+                AI assists by providing second opinions and highlighting areas of concern, but a licensed medical
+                professional must always make the final diagnosis.
+            </p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

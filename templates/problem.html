@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Hero -->
+<section class="section" style="padding-top: 8rem;">
+    <div class="container">
+        <div class="section-header">
+            <div class="badge animate-fade-up">Understanding the Challenge</div>
+            <h1 class="section-title animate-fade-up delay-1">Why <span class="gradient-text">AI in Medical
+                    Imaging</span> Matters</h1>
+            <p class="section-desc animate-fade-up delay-2" style="color: var(--text-gray);">
+                Billions of people worldwide lack access to quality radiology diagnosis. The gap between the number of
+                medical images produced and the available specialists to read them is widening every day.
+            </p>
+        </div>
+
+        <div class="row g-5 mt-2">
+            <div class="col-md-6">
+                <div class="d-flex gap-3 animate-fade-up delay-3">
+                    <div class="flex-shrink-0">
+                        <div class="glass-card-sm d-flex align-items-center justify-content-center"
+                            style="width: 60px; height: 60px; border-radius: 12px;">
+                            <i class="bi bi-globe" style="font-size: 1.75rem; color: var(--rose);"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="h4 mb-2" style="color: #e2e8f0;">Global Radiologist Shortage</h3>
+                        <p style="color: #cbd5e1; line-height: 1.7;">
+                            The WHO reports that over two-thirds of the world's population lacks access to basic medical
+                            imaging. In many developing nations, there is fewer than 1 radiologist per 100,000 people,
+                            leading to millions of unread X-rays.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex gap-3 animate-fade-up delay-3">
+                    <div class="flex-shrink-0">
+                        <div class="glass-card-sm d-flex align-items-center justify-content-center"
+                            style="width: 60px; height: 60px; border-radius: 12px;">
+                            <i class="bi bi-clock-history" style="font-size: 1.75rem; color: var(--rose);"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="h4 mb-2" style="color: #e2e8f0;">Overwhelming Workloads</h3>
+                        <p style="color: #cbd5e1; line-height: 1.7;">
+                            Radiologists face an unprecedented burnout crisis, often interpreting an image every 3-4
+                            seconds. This cognitive overload increases fatigue and diagnostic errors, which can reach
+                            30% in high-stress environments.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex gap-3 animate-fade-up delay-4">
+                    <div class="flex-shrink-0">
+                        <div class="glass-card-sm d-flex align-items-center justify-content-center"
+                            style="width: 60px; height: 60px; border-radius: 12px;">
+                            <i class="bi bi-eye-slash" style="font-size: 1.75rem; color: var(--rose);"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="h4 mb-2" style="color: #e2e8f0;">Subtle Findings Missed</h3>
+                        <p style="color: #cbd5e1; line-height: 1.7;">
+                            Early-stage pathologies often present as subtle opacities easily overlooked by tired eyes.
+                            Missing these early signs can delay treatment until the disease has progressed to a more
+                            dangerous stage.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex gap-3 animate-fade-up delay-4">
+                    <div class="flex-shrink-0">
+                        <div class="glass-card-sm d-flex align-items-center justify-content-center"
+                            style="width: 60px; height: 60px; border-radius: 12px;">
+                            <i class="bi bi-geo-alt" style="font-size: 1.75rem; color: var(--rose);"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="h4 mb-2" style="color: #e2e8f0;">Health Equity Gap</h3>
+                        <p style="color: #cbd5e1; line-height: 1.7;">
+                            Rural clinics often struggle to provide basic diagnostic services compared to urban centers.
+                            Patients frequently face long travel or wait weeks for a diagnosis that could be made
+                            instantly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex gap-3 animate-fade-up delay-5">
+                    <div class="flex-shrink-0">
+                        <div class="glass-card-sm d-flex align-items-center justify-content-center"
+                            style="width: 60px; height: 60px; border-radius: 12px;">
+                            <i class="bi bi-question-circle" style="font-size: 1.75rem; color: var(--rose);"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="h4 mb-2" style="color: #e2e8f0;">The "Black Box" Problem</h3>
+                        <p style="color: #cbd5e1; line-height: 1.7;">
+                            Many AI tools provide scores without explanation. If a doctor cannot see *why* the AI made a
+                            prediction, they cannot trust it. Lack of interpretability is a major barrier to adoption.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex gap-3 animate-fade-up delay-5">
+                    <div class="flex-shrink-0">
+                        <div class="glass-card-sm d-flex align-items-center justify-content-center"
+                            style="width: 60px; height: 60px; border-radius: 12px;">
+                            <i class="bi bi-person-check" style="font-size: 1.75rem; color: var(--rose);"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="h4 mb-2" style="color: #e2e8f0;">Human-AI Collaboration</h3>
+                        <p style="color: #cbd5e1; line-height: 1.7;">
+                            Technology should augment, not replace, physicians. The ideal system acts as a tireless
+                            second pair of eyes, highlighting abnormalities for human review to combine speed with
+                            clinical judgment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="section"
+    style="background: linear-gradient(180deg, transparent, rgba(244, 63, 94, 0.03), transparent);">
+    <div class="container">
+        <div class="section-header center">
+            <h2 class="section-title">The <span style="color: var(--rose);">Scale</span> of the Problem</h2>
+        </div>
+        <div class="stats-row">
+            <div class="stat">
+                <div class="stat-value" style="background: var(--rose-gradient); -webkit-background-clip: text;">2B+
+                </div>
+                <div class="stat-label" style="color: var(--text-muted);">X-rays taken annually worldwide</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" style="background: var(--rose-gradient); -webkit-background-clip: text;">4.2B
+                </div>
+                <div class="stat-label" style="color: var(--text-muted);">People lack radiology access</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" style="background: var(--rose-gradient); -webkit-background-clip: text;">Days
+                </div>
+                <div class="stat-label" style="color: var(--text-muted);">Average wait for diagnosis</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

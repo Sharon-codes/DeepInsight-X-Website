@@ -1,0 +1,11 @@
+--- Chest X-ray Analysis Report ---
+Date: 2025-12-09 13:20:10
+
+Predicted Findings:
+- No specific pathologies detected with high confidence.
+
+Visual Explanations (Grad-CAM Heatmaps):
+- Heatmap for placeholder: see attached image.
+
+Disclaimer: This AI-generated report is for informational purposes only and not a medical diagnosis.
+--- End of Report ---

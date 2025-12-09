@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-row">
+      <div class="hero-content">
+        <div class="badge animate-fade-up">AI-Powered Medical Imaging</div>
+
+        <h1 class="animate-fade-up delay-1">
+          Chest X-ray Analysis with <span class="gradient-text glow-text">Explainable AI</span>
+        </h1>
+
+        <p class="animate-fade-up delay-2" style="color: var(--text-gray);">
+          DeepInsight X uses advanced deep learning to detect 14 lung and heart conditions from chest X-rays.
+          See exactly where the AI found problems with Grad-CAM heatmaps, get detailed reports, and ask questions about
+          results.
+        </p>
+
+        <div class="hero-buttons animate-fade-up delay-3">
+          <a class="btn btn-primary btn-lg" href="{{ url_for('check_model') }}">
+            <i class="bi bi-rocket-takeoff"></i> Try the Demo
+          </a>
+          <a class="btn btn-secondary btn-lg" href="{{ url_for('solution') }}">
+            <i class="bi bi-layers"></i> How It Works
+          </a>
+        </div>
+
+        <div class="hero-stats animate-fade-up delay-4">
+          <div class="stat">
+            <div class="stat-value">14</div>
+            <div class="stat-label" style="color: var(--text-muted);">Conditions Detected</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">280K+</div>
+            <div class="stat-label" style="color: var(--text-muted);">Training Images</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">Grad-CAM</div>
+            <div class="stat-label" style="color: var(--text-muted);">Visual Explanations</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual animate-fade-left delay-3">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span class="hero-card-dot"></span>
+            <span class="hero-card-dot"></span>
+            <span class="hero-card-dot"></span>
+          </div>
+          <div class="hero-card-body">
+            <div class="hero-xray">
+              <i class="bi bi-lungs"></i>
+            </div>
+            <div class="hero-bars">
+              <div class="text-sm mb-1" style="color: var(--text-muted);">AI Predictions</div>
+              <div class="hero-bar">
+                <div class="hero-bar-fill" style="--w: 92%; --delay: 0.8s;"></div>
+              </div>
+              <div class="hero-bar">
+                <div class="hero-bar-fill" style="--w: 78%; --delay: 1s;"></div>
+              </div>
+              <div class="hero-bar">
+                <div class="hero-bar-fill" style="--w: 65%; --delay: 1.2s;"></div>
+              </div>
+              <div class="hero-bar">
+                <div class="hero-bar-fill" style="--w: 45%; --delay: 1.4s;"></div>
+              </div>
+              <div class="hero-bar">
+                <div class="hero-bar-fill" style="--w: 30%; --delay: 1.6s;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section - 2x2 Grid -->
+<section class="section">
+  <div class="container">
+    <div class="section-header center">
+      <h2 class="section-title">Powerful <span class="gradient-text">Capabilities</span></h2>
+      <p class="section-desc" style="color: var(--text-gray);">
+        Everything you need for AI-assisted chest X-ray analysis with full transparency.
+      </p>
+    </div>
+
+    <div class="row g-4" style="max-width: 1000px; margin: 0 auto;">
+      <div class="col-md-6">
+        <div class="glass-card feature-card h-100">
+          <div class="feature-icon"><i class="bi bi-stack"></i></div>
+          <h3 class="feature-title">Multi-Label Detection</h3>
+          <p class="feature-desc" style="color: var(--text-muted);">
+            Identifies multiple conditions simultaneously. Patients often have more than one problem—our AI handles that
+            reality.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="glass-card feature-card h-100">
+          <div class="feature-icon"><i class="bi bi-eye"></i></div>
+          <h3 class="feature-title">Visual Explanations</h3>
+          <p class="feature-desc" style="color: var(--text-muted);">
+            Grad-CAM heatmaps highlight exactly which regions of the X-ray influenced each prediction. Verify AI
+            reasoning instantly.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="glass-card feature-card h-100">
+          <div class="feature-icon"><i class="bi bi-file-earmark-medical"></i></div>
+          <h3 class="feature-title">Structured Reports</h3>
+          <p class="feature-desc" style="color: var(--text-muted);">
+            Auto-generated diagnostic reports with findings, confidence scores, and clinical context. Download and share
+            results.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="glass-card feature-card h-100">
+          <div class="feature-icon"><i class="bi bi-chat-dots"></i></div>
+          <h3 class="feature-title">Intelligent Q&A</h3>
+          <p class="feature-desc" style="color: var(--text-muted);">
+            Ask questions about your results. Answers are strictly grounded in the report—no hallucinations or
+            fabricated data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="section"
+  style="background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.03), transparent);">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-value">280,000+</div>
+        <div class="stat-label" style="color: var(--text-muted);">Training X-rays</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">30,805</div>
+        <div class="stat-label" style="color: var(--text-muted);">Unique Patients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">14</div>
+        <div class="stat-label" style="color: var(--text-muted);">Pathologies</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">ConvNeXt</div>
+        <div class="stat-label" style="color: var(--text-muted);">Architecture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="glass-card cta-card" style="padding: 4rem 2rem;">
+      <div class="badge animate-fade-up mb-3">Live Demo Available</div>
+      <h2 class="section-title mb-3">Ready to Experience <span class="gradient-text">AI Diagnosis</span>?</h2>
+      <p class="section-desc mx-auto mb-4" style="color: var(--text-gray); font-size: 1.2rem; max-width: 700px;">
+        Don't just read about it. Upload a chest X-ray now and see the power of DeepInsight X firsthand.
+        Get instant predictions, visual heatmaps, and a comprehensive report in seconds.
+      </p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a class="btn btn-primary btn-lg px-5 py-3" href="{{ url_for('check_model') }}" style="font-size: 1.1rem;">
+          <i class="bi bi-rocket-takeoff me-2"></i> Try It Now
+        </a>
+        <a class="btn btn-secondary btn-lg px-5 py-3" href="{{ url_for('solution') }}" style="font-size: 1.1rem;">
+          <i class="bi bi-info-circle me-2"></i> Learn More
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

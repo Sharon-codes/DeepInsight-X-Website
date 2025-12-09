@@ -1,0 +1,9 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="container mt-3">
+    {% for m in messages %}
+    <div class="alert"><i class="bi bi-info-circle"></i> {{ m }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}

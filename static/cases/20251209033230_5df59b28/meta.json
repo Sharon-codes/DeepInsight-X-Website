@@ -1,0 +1,14 @@
+{
+  "case_id": "20251209033230_5df59b28",
+  "processed_image": "processed_00000001_000.png",
+  "predictions": [
+    {
+      "label": "ModelUnavailable",
+      "confidence": "0.0000"
+    }
+  ],
+  "heatmaps": [
+    "heatmap_placeholder.png"
+  ],
+  "created_at": "2025-12-09T03:32:32.582435"
+}
