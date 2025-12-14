@@ -607,7 +607,13 @@ def chat(case_id):
     
     try:
         import google.generativeai as genai
-        genai.configure(api_key="AIzaSyB6XZb_5cO2BmlCyDEHevUCUkxjhEgp1sk")
+        
+        # Get API key from environment variable
+        API_KEY = os.environ.get('GEMINI_API_KEY')
+        if not API_KEY:
+            return jsonify({"ok": False, "answer": "⚠️ Gemini API key not configured. Please set GEMINI_API_KEY environment variable."})
+        
+        genai.configure(api_key=API_KEY)
         model = genai.GenerativeModel('models/gemini-flash-latest')
         
         response = model.generate_content(
