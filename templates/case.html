@@ -24,6 +24,52 @@
             </div>
         </div>
 
+        <!-- Placeholder Mode Banner -->
+        {% if predictions and predictions[0].get('label') == 'ModelUnavailable' %}
+        <div class="alert alert-warning animate-fade-up delay-1" style="
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.1));
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(251, 191, 36, 0.1);
+        ">
+            <div class="d-flex align-items-start gap-3 flex-wrap">
+                <div style="font-size: 2rem; color: #fbbf24; flex-shrink: 0;">⚠️</div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h5 style="color: #fbbf24; margin-bottom: 0.75rem; font-weight: 600;">
+                        <i class="bi bi-info-circle me-2"></i>Placeholder Mode
+                    </h5>
+                    <p style="color: #cbd5e1; margin-bottom: 1rem; line-height: 1.6;">
+                        This is a <strong>demonstration deployment</strong> without the AI model.
+                        The heatmaps shown below are placeholders, not real analysis results.
+                    </p>
+                    <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: #e2e8f0; margin: 0; font-size: 0.9rem;">
+                            <strong>✅ Working:</strong> Google Gemini AI Chatbot (try the Chat tab!)<br>
+                            <strong>❌ Not Available:</strong> Real pathology detection & Grad-CAM heatmaps
+                        </p>
+                    </div>
+                    <a href="https://github.com/Sharon-codes/DeepInsight-X" target="_blank" class="btn btn-warning"
+                        style="
+                        background: linear-gradient(135deg, #fbbf24, #f59e0b);
+                        border: none;
+                        padding: 0.75rem 1.5rem;
+                        font-weight: 600;
+                        box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+                        transition: all 0.3s ease;
+                    ">
+                        <i class="bi bi-github me-2"></i>Run Full AI Model Locally
+                    </a>
+                    <p style="color: #94a3b8; margin-top: 0.75rem; font-size: 0.85rem; margin-bottom: 0;">
+                        Clone the repository to run the complete ConvNeXt Large model with real inference
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
         <!-- Tabs -->
         <ul class="nav tabs animate-fade-up delay-1" id="caseTabs" role="tablist" style="margin-bottom: 1.5rem;">
             <li><button class="tab active" data-bs-toggle="tab" data-bs-target="#img" type="button"><i

@@ -667,25 +667,65 @@ YOUR ANSWER:""",
 
 def build_report(predicted_class_names, confidence_scores, heatmap_filenames):
     ts = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    report = ["--- Chest X-ray Analysis Report ---", f"Date: {ts}", "", "Predicted Findings:"]
-    if not predicted_class_names:
-        report.append("- No specific pathologies detected with high confidence.")
+    
+    # Check if this is placeholder mode (model not loaded)
+    is_placeholder = 'ModelUnavailable' in confidence_scores or not predicted_class_names
+    
+    if is_placeholder:
+        report = [
+            "--- Chest X-ray Demo Report (Placeholder Mode) ---",
+            f"Date: {ts}",
+            "",
+            "⚠️ NOTICE: AI Model Not Available",
+            "",
+            "This deployment is running in demonstration mode without the AI model.",
+            "The actual ConvNeXt Large model requires significant computing resources",
+            "and is not available on this free hosting tier.",
+            "",
+            "🔬 To Run Full AI Analysis:",
+            "",
+            "1. Clone the training repository:",
+            "   https://github.com/Sharon-codes/DeepInsight-X",
+            "",
+            "2. Download the trained model (best_model_v3.pth)",
+            "",
+            "3. Run locally with GPU for real-time analysis",
+            "",
+            "4. Or deploy to paid hosting with GPU support",
+            "",
+            "💬 AI Chatbot:",
+            "The Google Gemini-powered chatbot IS fully functional!",
+            "Try asking questions in the Chat tab.",
+            "",
+            "📊 Features Available Locally:",
+            "- 14 thoracic pathology detection",
+            "- Grad-CAM heatmap visualizations",
+            "- AUROC > 0.90 accuracy",
+            "- 230K+ training images (NIH, OpenI, ReXGradient)",
+            "",
+            "--- End of Demo Report ---"
+        ]
     else:
-        for name in predicted_class_names:
-            conf = confidence_scores.get(name, 'N/A')
-            report.append(f"- {name}: Confidence = {conf}")
-            report.append(f"  Explanation: The model identified patterns consistent with {name}.")
-    report.append("")
-    report.append("Visual Explanations (Grad-CAM Heatmaps):")
-    if heatmap_filenames:
-        for h in heatmap_filenames:
-            c = h.replace('heatmap_', '').replace('.png', '')
-            report.append(f"- Heatmap for {c}: see attached image.")
-    else:
-        report.append("- No heatmaps generated.")
-    report.append("")
-    report.append("Disclaimer: This AI-generated report is for informational purposes only and not a medical diagnosis.")
-    report.append("--- End of Report ---")
+        report = ["--- Chest X-ray Analysis Report ---", f"Date: {ts}", "", "Predicted Findings:"]
+        if not predicted_class_names:
+            report.append("- No specific pathologies detected with high confidence.")
+        else:
+            for name in predicted_class_names:
+                conf = confidence_scores.get(name, 'N/A')
+                report.append(f"- {name}: Confidence = {conf}")
+                report.append(f"  Explanation: The model identified patterns consistent with {name}.")
+        report.append("")
+        report.append("Visual Explanations (Grad-CAM Heatmaps):")
+        if heatmap_filenames:
+            for h in heatmap_filenames:
+                c = h.replace('heatmap_', '').replace('.png', '')
+                report.append(f"- Heatmap for {c}: see attached image.")
+        else:
+            report.append("- No heatmaps generated.")
+        report.append("")
+        report.append("Disclaimer: This AI-generated report is for informational purposes only and not a medical diagnosis.")
+        report.append("--- End of Report ---")
+    
     return "\n".join(report)
 
 
