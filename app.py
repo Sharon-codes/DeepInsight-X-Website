@@ -85,6 +85,12 @@ def load_model_once():
     global MODEL, GRADCAM, INFER_TRANSFORM
     if MODEL is not None:
         return
+    
+    # Allow disabling model for free tier deployments (chatbot only)
+    if os.environ.get('DISABLE_MODEL_LOADING') == '1':
+        app.logger.info('Model loading disabled (DISABLE_MODEL_LOADING=1). Using placeholder mode.')
+        return
+    
     try:
         # Lazy-import heavy ML dependencies here
         import torch
