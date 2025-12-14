@@ -1,0 +1,14 @@
+{
+  "case_id": "20251213235052_ae4f2d09",
+  "processed_image": "processed_00000001_000.png",
+  "predictions": [
+    {
+      "label": "Atelectasis",
+      "confidence": "0.5372"
+    }
+  ],
+  "heatmaps": [
+    "heatmap_Atelectasis.png"
+  ],
+  "created_at": "2025-12-14T00:02:40.960127"
+}

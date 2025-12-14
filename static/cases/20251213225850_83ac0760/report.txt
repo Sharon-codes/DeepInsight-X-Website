@@ -1,0 +1,12 @@
+--- Chest X-ray Analysis Report ---
+Date: 2025-12-13 23:10:23
+
+Predicted Findings:
+- Atelectasis: Confidence = 0.5372
+  Explanation: The model identified patterns consistent with Atelectasis.
+
+Visual Explanations (Grad-CAM Heatmaps):
+- Heatmap for Atelectasis: see attached image.
+
+Disclaimer: This AI-generated report is for informational purposes only and not a medical diagnosis.
+--- End of Report ---

@@ -89,7 +89,8 @@
                 </h4>
                 <p class="mb-3" style="color: #cbd5e1;">Visualizations showing which regions influenced each prediction.
                     <strong style="color: var(--rose);">Red/Yellow</strong> = high attention, <strong
-                        style="color: var(--cyan);">Blue/Green</strong> = low attention.</p>
+                        style="color: var(--cyan);">Blue/Green</strong> = low attention.
+                </p>
 
                 {% if heatmaps %}
                 <div class="row g-3">
@@ -184,8 +185,16 @@
             const q = chatInput.value.trim();
             if (!q) return;
 
+            // 1. Show user message
             addMsg('user', q);
             chatInput.value = '';
+
+            // 2. Show "Thinking..." indicator
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.className = 'chat-message assistant';
+            thinkingDiv.innerHTML = '<i class="bi bi-robot"></i> Thinking...';
+            chatLog.appendChild(thinkingDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
 
             try {
                 const res = await fetch("{{ url_for('chat', case_id=case_id) }}", {
@@ -194,9 +203,11 @@
                     body: JSON.stringify({ question: q })
                 });
                 const data = await res.json();
-                addMsg('assistant', data.answer || 'No response received.');
+
+                // 3. Replace "Thinking..." with actual answer
+                thinkingDiv.innerHTML = data.answer || 'No response received.';
             } catch (err) {
-                addMsg('assistant', 'Error reaching the server. Please try again.');
+                thinkingDiv.innerHTML = 'Error reaching the AI server. Please try again.';
             }
         });
     }

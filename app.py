@@ -56,7 +56,12 @@ DEVICE = None
 
 def _resolve_model_path():
     candidates = [
+        BASE_DIR / 'models' / 'best_model_v3.pth',  # Latest trained model
+        BASE_DIR / 'models' / 'best_model.pth',
+        BASE_DIR / 'models' / 'best_model_v2.pth',
+        CORE_DIR / 'models' / 'best_model_v3.pth',
         CORE_DIR / 'models' / 'best_model.pth',
+        CORE_DIR / 'models' / 'best_model_v2.pth',
         CORE_DIR / 'models' / 'final_model.pth',
         CORE_DIR / 'models' / 'latest_model.pth',
     ]
@@ -98,10 +103,10 @@ def load_model_once():
             return
         num_classes = len(TARGET_PATHOLOGIES)
         candidates = [
+            ('convnext_large', 'base_model.features.7'),  # Try ConvNeXt first (matches train_v2.py)
             ('resnext101_32x8d', 'base_model.layer4'),
             ('resnet101', 'base_model.layer4'),
             ('efficientnet_b4', 'base_model.features.6'),
-            ('convnext_large', 'base_model.features.7'),
         ]
         state = torch.load(str(model_path), map_location=DEVICE)
         last_error = None
@@ -585,114 +590,67 @@ def answer_from_report_multimodal(report_text: str, question: str, image_path: s
         return answer_from_report(report_text, question, k=k)
 
 
-def load_generator_once():
-    """Lazy-load a seq2seq generative model (Flan-T5 family by default) for RAG-style answers."""
-    global GEN_MODEL, GEN_TOKENIZER, GEN_DEVICE
-    if GEN_MODEL is not None and GEN_TOKENIZER is not None:
-        return
-    try:
-        import torch
-        from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-        model_name = GEN_MODEL_NAME
-        GEN_TOKENIZER = AutoTokenizer.from_pretrained(model_name)
-        GEN_MODEL = AutoModelForSeq2SeqLM.from_pretrained(model_name)
-        # place model on device
-        GEN_DEVICE = torch.device('cuda' if torch.cuda.is_available() and not USE_CPU else 'cpu')
-        GEN_MODEL.to(GEN_DEVICE)
-        app.logger.info(f'Loaded generator model {model_name} on {GEN_DEVICE}')
-    except Exception:
-        app.logger.exception('Failed to load generator model; generative answers will be unavailable')
-        GEN_MODEL = None
-        GEN_TOKENIZER = None
-        GEN_DEVICE = None
-
-
-def generate_answer_rag(report_text: str, question: str, image_path: str = None, k: int = 3):
-    """Retrieve top-k snippets (multimodal) and generate a human-like answer using the seq2seq model.
-
-    Falls back to multimodal retrieval-only answer when generator is unavailable.
-    """
-    # First retrieve relevant snippets
-    try:
-        snippets_answer = answer_from_report_multimodal(report_text, question, image_path=image_path, k=k)
-        # answer_from_report_multimodal returns a bullet list string; extract snippets
-        # We'll parse by splitting on newlines and dropping the lead phrase
-        parts = [s.strip() for s in snippets_answer.split('\n') if s.strip()]
-        # Remove any leading 'Based on the generated report' line
-        if parts and parts[0].lower().startswith('based on'):
-            parts = parts[1:]
-        snippets = parts[:k]
-    except Exception:
-        app.logger.exception('Retrieval failed inside RAG')
-        return answer_from_report(report_text, question, k=k)
-
-    # Load generator model
-    load_generator_once()
-    if GEN_MODEL is None or GEN_TOKENIZER is None:
-        # Generator not available; return retrieval-only answer
-        return "Based on the generated report, here are the most relevant details:\n" + "\n".join(snippets)
-
-    try:
-        # Build a concise RAG prompt with explicit grounding and human-like style
-        prompt = (
-            "You are a helpful, human-like medical assistant. Answer conversationally in 2-4 sentences, then provide up to three short evidence bullets that cite the snippet numbers. "
-            "Use ONLY the provided report snippets; do NOT invent facts. If the snippets don't contain enough information, respond: 'I don't know based on the report.'\n\n"
-        )
-        prompt += "Report snippets:\n"
-        for i, s in enumerate(snippets, 1):
-            prompt += f"[{i}] {s}\n"
-        prompt += f"\nUser question: {question}\n\nAnswer:" 
-
-        # Tokenize and generate
-        inputs = GEN_TOKENIZER(prompt, return_tensors='pt', truncation=True, max_length=1024).to(GEN_DEVICE)
-        gen = GEN_MODEL.generate(**inputs, max_length=256, num_beams=4, early_stopping=True)
-        out = GEN_TOKENIZER.decode(gen[0], skip_special_tokens=True)
-        return out
-    except Exception:
-        app.logger.exception('Generation failed; returning retrieval-only answer')
-        return "Based on the generated report, here are the most relevant details:\n" + "\n".join(snippets)
 
 
 @app.route('/case/<case_id>/chat', methods=['POST'])
 def chat(case_id):
-    """AI-powered multimodal chat that analyzes heatmaps and reports using Gemini"""
+    """Gemini-powered AI chat"""
     data = request.get_json(silent=True) or {}
     question = (data.get('question') or '').strip()
     if not question:
         return jsonify({"ok": False, "answer": "Please enter a question."})
     
-    # Load report
     report_path = CASES_ROOT / case_id / 'report.txt'
     if not report_path.exists():
-        return jsonify({"ok": False, "answer": "Report not found for this case."})
+        return jsonify({"ok": False, "answer": "Report not found."})
     report_text = report_path.read_text(encoding='utf-8')
     
-    # Prefer local multimodal retrieval (CLIP + TF-IDF fallback). This avoids paid APIs
     try:
-        case_dir = CASES_ROOT / case_id
-        processed_image = None
-        meta_path = case_dir / 'meta.json'
-        if meta_path.exists():
-            import json
-            md = json.loads(meta_path.read_text(encoding='utf-8'))
-            processed_image = md.get('processed_image')
-        processed_image_path = str(case_dir / processed_image) if processed_image else None
+        import google.generativeai as genai
+        genai.configure(api_key="AIzaSyB6XZb_5cO2BmlCyDEHevUCUkxjhEgp1sk")
+        model = genai.GenerativeModel('models/gemini-flash-latest')
+        
+        response = model.generate_content(
+            f"""You are a medical AI assistant analyzing a Chest X-ray report.
 
-        # If a generative model is available, produce a natural, human-like answer
-        try:
-            load_generator_once()
-            if GEN_MODEL is not None:
-                ans = generate_answer_rag(report_text, question, image_path=processed_image_path, k=3)
-            else:
-                ans = answer_from_report_multimodal(report_text, question, image_path=processed_image_path, k=3)
-        except Exception:
-            app.logger.exception('Error producing generative answer; falling back to retrieval-only')
-            ans = answer_from_report_multimodal(report_text, question, image_path=processed_image_path, k=3)
-        return jsonify({"ok": True, "answer": ans})
-    except Exception:
-        app.logger.exception('Multimodal chat failed; falling back to TF-IDF answer')
-        ans = answer_from_report(report_text, question)
-        return jsonify({"ok": True, "answer": ans})
+Your task: Read the ENTIRE report below and answer the user's question clearly and professionally.
+
+KEY INSTRUCTIONS:
+- Look for the "Predicted Findings" section to see what pathologies were detected
+- If it says "No specific pathologies detected", tell the user the X-ray appears normal
+- If pathologies are listed, mention them and their confidence scores
+- Reference the heatmap visualizations if relevant
+- Be concise but informative (2-4 sentences)
+
+IMPORTANT SAFETY RULES:
+- You can ONLY answer questions about what the report SAYS (findings, confidence scores, interpretations)
+- You CANNOT provide medical advice, treatment recommendations, or suggest cures
+- If asked about treatment/cure/medication, respond: "I can only explain what the report shows. Please consult a physician for treatment advice."
+- If asked about prognosis or what to do next, respond: "Please discuss next steps with your healthcare provider."
+
+=== FULL MEDICAL REPORT ===
+{report_text}
+=== END OF REPORT ===
+
+USER'S QUESTION: {question}
+
+YOUR ANSWER:""",
+            request_options={'timeout': 10}  # 10 second timeout
+        )
+        
+        return jsonify({"ok": True, "answer": response.text.strip()})
+    except Exception as e:
+        error_msg = str(e)
+        # User-friendly error messages
+        if 'timeout' in error_msg.lower() or '503' in error_msg or 'failed to connect' in error_msg.lower():
+            return jsonify({"ok": False, "answer": "⚠️ Network issue: Can't reach Google AI servers. Please check your internet connection or try again in a moment."})
+        elif '429' in error_msg:
+            return jsonify({"ok": False, "answer": "⚠️ Rate limit reached. Please wait a moment and try again."})
+        elif '404' in error_msg:
+            return jsonify({"ok": False, "answer": "⚠️ API configuration issue. The AI model is unavailable."})
+        else:
+            return jsonify({"ok": False, "answer": f"Chat error: {error_msg[:200]}"})
+
 
 
 def build_report(predicted_class_names, confidence_scores, heatmap_filenames):
